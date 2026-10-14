@@ -3,8 +3,8 @@
 import { useEffect, useState } from "react";
 
 const links = [
-  { href: "#freshness", label: "Свежесть" },
-  { href: "#coffee", label: "Зерно" },
+  { href: "#freshness", label: "Обжарщики" },
+  { href: "#coffee", label: "Ассортимент" },
   { href: "#subscription", label: "Подписка" },
   { href: "#order", label: "Контакты" },
 ];
@@ -30,21 +30,23 @@ export function Header() {
   return (
     <>
       <header className="topbar">
-        <a className="logo" href="#home" onClick={() => setOpen(false)}>
-          Кварта
-        </a>
-        <button
-          className="menu-button"
-          type="button"
-          aria-expanded={open}
-          aria-controls="site-menu"
-          aria-label={open ? "Закрыть меню" : "Открыть меню"}
-          onClick={() => setOpen((value) => !value)}
-        >
-          <span />
-          <span />
-          <span />
-        </button>
+        <div className="wrap topbar-inner">
+          <a className="logo" href="#home" onClick={() => setOpen(false)}>
+            Кварта
+          </a>
+          <button
+            className="menu-button"
+            type="button"
+            aria-expanded={open}
+            aria-controls="site-menu"
+            aria-label={open ? "Закрыть меню" : "Открыть меню"}
+            onClick={() => setOpen((value) => !value)}
+          >
+            <span />
+            <span />
+            <span />
+          </button>
+        </div>
       </header>
       {open ? (
         <nav id="site-menu" className="menu">

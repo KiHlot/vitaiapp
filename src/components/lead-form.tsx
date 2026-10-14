@@ -7,6 +7,12 @@ import {
   readTouch,
 } from "@/lib/attribution";
 import {
+  COFFEE_KEY,
+  coffees,
+  isCoffeeId,
+  type CoffeeId,
+} from "@/lib/coffees";
+import {
   formatBelarusPhone,
   normalizeBelarusPhone,
   phoneHint,
@@ -29,6 +35,7 @@ export function LeadForm() {
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const [interest, setInterest] = useState<Interest | "">("");
+  const [coffee, setCoffee] = useState<CoffeeId | "">("");
   const [comment, setComment] = useState("");
   const [errors, setErrors] = useState<Partial<Record<Field, string>>>({});
   const [formError, setFormError] = useState("");
@@ -39,21 +46,35 @@ export function LeadForm() {
   useEffect(() => {
     captureTouch();
 
+    const applyCoffee = (value: string | null) => {
+      if (isCoffeeId(value)) setCoffee(value);
+    };
+
     const onInterest = (event: Event) => {
       const detail = (event as CustomEvent<string>).detail;
       if (isInterest(detail)) setInterest(detail);
+      applyCoffee(sessionStorage.getItem(COFFEE_KEY));
+    };
+
+    const onCoffee = (event: Event) => {
+      const detail = (event as CustomEvent<string>).detail;
+      applyCoffee(detail);
     };
 
     window.addEventListener("kvarta-interest", onInterest);
+    window.addEventListener("kvarta-coffee", onCoffee);
 
     const stored = sessionStorage.getItem(INTEREST_KEY);
+    const storedCoffee = sessionStorage.getItem(COFFEE_KEY);
     const timer = window.setTimeout(() => {
       if (isInterest(stored)) setInterest(stored);
+      if (isCoffeeId(storedCoffee)) setCoffee(storedCoffee);
     }, 0);
 
     return () => {
       window.clearTimeout(timer);
       window.removeEventListener("kvarta-interest", onInterest);
+      window.removeEventListener("kvarta-coffee", onCoffee);
     };
   }, []);
 
@@ -100,6 +121,7 @@ export function LeadForm() {
           name: name.trim(),
           phone: normalized,
           interest,
+          coffee: coffees.find((item) => item.id === coffee)?.name ?? "",
           comment: comment.trim(),
           attribution: readTouch(),
         }),
@@ -209,6 +231,24 @@ export function LeadForm() {
             {errors.interest}
           </p>
         ) : null}
+      </fieldset>
+      <fieldset className="choices">
+        <legend>Какое зерно</legend>
+        {coffees.map((item) => (
+          <label key={item.id}>
+            <input
+              type="radio"
+              name="coffee"
+              value={item.id}
+              checked={coffee === item.id}
+              onChange={() => {
+                setCoffee(item.id);
+                sessionStorage.setItem(COFFEE_KEY, item.id);
+              }}
+            />
+            {item.name}
+          </label>
+        ))}
       </fieldset>
       <label className="field">
         <span>Комментарий</span>
