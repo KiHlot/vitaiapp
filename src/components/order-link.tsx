@@ -1,6 +1,7 @@
 "use client";
 
 import { INTEREST_KEY } from "@/lib/attribution";
+import { scrollOrderFormIntoView } from "@/lib/scroll-order-form";
 
 type OrderInterest = "once" | "subscription";
 
@@ -17,15 +18,11 @@ export function OrderLink({ interest }: { interest?: OrderInterest }) {
           );
         }
 
-        const form = document.getElementById("order");
         const name = document.getElementById("name");
-        if (!form || !name) return;
+        if (!name) return;
 
         event.preventDefault();
-        const reduce = window.matchMedia(
-          "(prefers-reduced-motion: reduce)",
-        ).matches;
-        form.scrollIntoView({ behavior: reduce ? "auto" : "smooth" });
+        scrollOrderFormIntoView();
         name.focus({ preventScroll: true });
       }}
     >
