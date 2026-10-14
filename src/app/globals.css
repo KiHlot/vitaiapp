@@ -61,7 +61,7 @@ p {
 }
 
 .wrap {
-  width: min(1600px, 100%);
+  width: min(1300px, 100%);
   margin-inline: auto;
 }
 
@@ -71,7 +71,7 @@ p {
   top: 0;
   bottom: 0;
   left: 50%;
-  width: min(1600px, 100%);
+  width: min(1300px, 100%);
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   transform: translateX(-50%);
@@ -99,8 +99,26 @@ p {
 }
 
 .topbar a,
-.topbar button {
+.topbar button,
+.topbar-tools {
   pointer-events: auto;
+}
+
+.topbar-tools {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+.topbar-phone {
+  padding: 6px 8px;
+  background: var(--bg);
+  font-family: var(--font-display), sans-serif;
+  font-size: 15px;
+  letter-spacing: 0.06em;
+  text-decoration: none;
+  color: var(--white);
+  white-space: nowrap;
 }
 
 .logo {
@@ -762,11 +780,51 @@ p {
   opacity: 0.72;
 }
 
-.colophon {
+.site-footer {
   position: relative;
   z-index: 1;
+  border-top: 1px solid var(--line);
+  padding: 64px 0 48px;
+}
+
+.site-footer-inner {
+  display: grid;
+  justify-items: center;
+  gap: 28px;
+  padding: 0 48px;
+  text-align: center;
+}
+
+.footer-address,
+.footer-phone {
   margin: 0;
-  padding: 0 48px 36px;
+  font-family: var(--font-display), sans-serif;
+  font-size: 18px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: var(--white);
+}
+
+.footer-nav {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px 28px;
+}
+
+.footer-nav a {
+  font-family: var(--font-display), sans-serif;
+  font-size: 14px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: var(--white);
+  white-space: nowrap;
+}
+
+.footer-copy {
+  margin: 4px 0 0;
   font-size: 12px;
   letter-spacing: 0.12em;
   text-transform: uppercase;
@@ -822,6 +880,15 @@ p {
     padding: 18px 20px;
   }
 
+  .topbar-tools {
+    gap: 8px;
+  }
+
+  .topbar-phone {
+    font-size: 12px;
+    letter-spacing: 0.02em;
+  }
+
   .hero-frame {
     min-height: 100svh;
     padding: 76px 20px 28px;
@@ -873,7 +940,7 @@ p {
   .section-head,
   .prose,
   .subscription,
-  .colophon,
+  .site-footer-inner,
   .big-stat {
     padding-left: 20px;
     padding-right: 20px;

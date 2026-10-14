@@ -1,3 +1,4 @@
+import { Footer } from "@/components/footer";
 import { Header } from "@/components/header";
 import { About } from "@/components/sections/about";
 import { Coffee } from "@/components/sections/coffee";
@@ -27,7 +28,7 @@ export default function Home() {
         <Subscription />
         <Order />
       </main>
-      <footer className="wrap colophon">Фото: Unsplash</footer>
+      <Footer />
     </>
   );
 }

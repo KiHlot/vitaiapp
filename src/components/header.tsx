@@ -1,13 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-
-const links = [
-  { href: "#freshness", label: "Обжарщики" },
-  { href: "#coffee", label: "Ассортимент" },
-  { href: "#subscription", label: "Подписка" },
-  { href: "#order", label: "Контакты" },
-];
+import { navLinks, phone, phoneHref } from "@/lib/site";
 
 export function Header() {
   const [open, setOpen] = useState(false);
@@ -34,23 +28,28 @@ export function Header() {
           <a className="logo" href="#home" onClick={() => setOpen(false)}>
             Кварта
           </a>
-          <button
-            className="menu-button"
-            type="button"
-            aria-expanded={open}
-            aria-controls="site-menu"
-            aria-label={open ? "Закрыть меню" : "Открыть меню"}
-            onClick={() => setOpen((value) => !value)}
-          >
-            <span />
-            <span />
-            <span />
-          </button>
+          <div className="topbar-tools">
+            <a className="topbar-phone" href={phoneHref}>
+              {phone}
+            </a>
+            <button
+              className="menu-button"
+              type="button"
+              aria-expanded={open}
+              aria-controls="site-menu"
+              aria-label={open ? "Закрыть меню" : "Открыть меню"}
+              onClick={() => setOpen((value) => !value)}
+            >
+              <span />
+              <span />
+              <span />
+            </button>
+          </div>
         </div>
       </header>
       {open ? (
         <nav id="site-menu" className="menu">
-          {links.map((link) => (
+          {navLinks.map((link) => (
             <a key={link.href} href={link.href} onClick={() => setOpen(false)}>
               {link.label}
             </a>
