@@ -1,5 +1,7 @@
 import Image from "next/image";
 import { Header } from "@/components/header";
+import { LeadForm } from "@/components/lead-form";
+import { OrderLink } from "@/components/order-link";
 
 const coffees = [
   {
@@ -36,14 +38,6 @@ const facts = [
   ["Самовывоз", "ул. Короля, 9"],
   ["Часы", "пн–пт 8:00–20:00, сб–вс 10:00–18:00"],
 ];
-
-function OrderLink({ interest }: { interest?: "once" | "subscription" }) {
-  return (
-    <a className="order-button" href="#order" data-interest={interest}>
-      Заказать
-    </a>
-  );
-}
 
 export default function Home() {
   return (
@@ -210,49 +204,7 @@ export default function Home() {
               </dd>
             </div>
           </dl>
-          <form className="lead-form">
-            <div className="form-row">
-              <label className="field">
-                <span>Имя</span>
-                <input id="name" name="name" type="text" autoComplete="name" />
-              </label>
-              <label className="field">
-                <span>Телефон</span>
-                <input
-                  id="phone"
-                  name="phone"
-                  type="tel"
-                  autoComplete="tel"
-                  inputMode="tel"
-                  placeholder="+375 29 123 45 67"
-                />
-              </label>
-            </div>
-            <fieldset className="choices">
-              <legend>Что интересует</legend>
-              <label>
-                <input type="radio" name="interest" value="subscription" />
-                Подписка
-              </label>
-              <label>
-                <input type="radio" name="interest" value="once" />
-                Разовый заказ
-              </label>
-              <label>
-                <input type="radio" name="interest" value="question" />
-                Вопрос
-              </label>
-            </fieldset>
-            <label className="field">
-              <span>Комментарий</span>
-              <textarea name="comment" rows={3} />
-            </label>
-            <div className="section-action">
-              <button className="order-button" type="button">
-                Отправить
-              </button>
-            </div>
-          </form>
+          <LeadForm />
         </section>
       </main>
       <footer className="colophon">Фото: Unsplash</footer>

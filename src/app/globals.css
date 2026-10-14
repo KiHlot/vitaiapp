@@ -632,6 +632,26 @@ p {
   color: var(--white);
 }
 
+.choices .field-error,
+.field-error {
+  width: 100%;
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.4;
+  color: #f0c7b8;
+}
+
+.form-status {
+  margin: 8px 0 0;
+  text-align: center;
+  font-size: 16px;
+}
+
+.order-button:disabled {
+  cursor: wait;
+  opacity: 0.72;
+}
+
 .colophon {
   position: relative;
   z-index: 1;
