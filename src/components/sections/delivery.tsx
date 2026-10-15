@@ -25,18 +25,20 @@ export function Delivery() {
             <span>одна партия</span>
           </li>
           <li>
-            <strong>2019</strong>
-            <span>жарим с этого года</span>
-          </li>
-          <li>
-            <strong>пятница</strong>
-            <span>развоз по Минску</span>
+            <strong>самовывоз</strong>
+            <span>
+              на Короля,&nbsp;9
+            </span>
           </li>
           <li>
             <strong>
               от 50 <Ruble />
             </strong>
             <span>доставка бесплатно</span>
+          </li>
+          <li>
+            <strong>пятница</strong>
+            <span>развоз по Минску</span>
           </li>
         </ul>
       </div>

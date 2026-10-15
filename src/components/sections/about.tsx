@@ -8,8 +8,6 @@ const hours = (
 );
 
 const facts: { label: string; value: ReactNode }[] = [
-  { label: "С какого года", value: "2019" },
-  { label: "Партия", value: "5 кг" },
   { label: "Обжарка", value: "каждый четверг" },
   { label: "Развоз", value: "по пятницам, по Минску" },
   { label: "Самовывоз", value: "ул. Короля, 9" },

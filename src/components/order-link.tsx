@@ -2,10 +2,17 @@
 
 import { INTEREST_KEY } from "@/lib/attribution";
 import { scrollOrderFormIntoView } from "@/lib/scroll-order-form";
+import type { ReactNode } from "react";
 
 type OrderInterest = "once" | "subscription";
 
-export function OrderLink({ interest }: { interest?: OrderInterest }) {
+export function OrderLink({
+  interest,
+  label = "Заказать",
+}: {
+  interest?: OrderInterest;
+  label?: ReactNode;
+}) {
   return (
     <a
       className="order-button"
@@ -26,7 +33,7 @@ export function OrderLink({ interest }: { interest?: OrderInterest }) {
         name.focus({ preventScroll: true });
       }}
     >
-      Заказать
+      <span className="order-button-label">{label}</span>
     </a>
   );
 }

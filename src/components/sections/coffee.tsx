@@ -1,4 +1,4 @@
-import { CoffeePrice } from "@/components/coffee-price";
+import { CoffeeCard } from "@/components/coffee-card";
 import { OrderLink } from "@/components/order-link";
 import { coffees } from "@/lib/coffees";
 
@@ -12,16 +12,8 @@ export function Coffee() {
         </div>
         <div className="coffees">
           {coffees.map((coffee) => (
-            <article className="coffee" key={coffee.id}>
-              <p className="kicker">{coffee.origin}</p>
-              <h3>{coffee.name}</h3>
-              <p>{coffee.note}</p>
-              <CoffeePrice id={coffee.id} name={coffee.name} price={coffee.price} />
-            </article>
+            <CoffeeCard key={coffee.id} {...coffee} />
           ))}
-        </div>
-        <div className="section-action">
-          <OrderLink interest="once" />
         </div>
       </div>
     </section>
