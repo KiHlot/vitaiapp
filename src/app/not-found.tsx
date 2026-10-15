@@ -6,7 +6,9 @@ export default function NotFound() {
       <h1 className="not-found-code">404</h1>
       <p className="not-found-title">Такой страницы нет</p>
       <Link className="not-found-home" href="/">
-        На главную
+        На
+        <br />
+        главную
       </Link>
     </main>
   );

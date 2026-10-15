@@ -1,5 +1,6 @@
 import { Footer } from "@/components/footer";
 import { Header } from "@/components/header";
+import { Reveal } from "@/components/reveal";
 import { About } from "@/components/sections/about";
 import { Coffee } from "@/components/sections/coffee";
 import { Delivery } from "@/components/sections/delivery";
@@ -20,6 +21,7 @@ export default function Home() {
         <span />
       </div>
       <Header />
+      <Reveal />
       <main>
         <Hero />
         <About />

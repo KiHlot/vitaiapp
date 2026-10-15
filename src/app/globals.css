@@ -1127,13 +1127,13 @@ p {
   line-height: 0.85;
   letter-spacing: 0.04em;
   color: var(--white);
-  animation: not-found-in 0.7s ease both;
+  animation: rise-in 0.7s ease both;
 }
 
 .not-found-title {
   margin: 0;
   color: var(--muted);
-  animation: not-found-in 0.7s 0.12s ease both;
+  animation: rise-in 0.7s 0.12s ease both;
 }
 
 .not-found-home {
@@ -1155,7 +1155,7 @@ p {
   text-decoration: none;
   text-align: center;
   line-height: 1.15;
-  animation: not-found-in 0.7s 0.22s ease both;
+  animation: rise-in 0.7s 0.22s ease both;
 }
 
 .not-found-home::before {
@@ -1176,7 +1176,125 @@ p {
   outline-offset: 18px;
 }
 
-@keyframes not-found-in {
+.hero-photo,
+.hero-kicker,
+.hero h1,
+.hero-sub,
+.hero-note,
+.hero-address,
+.topbar-inner {
+  animation: rise-in 0.7s ease both;
+}
+
+.topbar-inner {
+  animation-delay: 0.06s;
+}
+
+.hero-kicker {
+  animation-delay: 0.14s;
+}
+
+.hero h1 {
+  animation-delay: 0.22s;
+}
+
+.hero-sub {
+  animation-delay: 0.3s;
+}
+
+.hero .order-button {
+  animation: hero-order-in 0.7s 0.36s ease both;
+}
+
+.hero-note {
+  animation-delay: 0.44s;
+}
+
+.hero-address {
+  animation-delay: 0.18s;
+}
+
+html.motion .section:not(.is-in) :is(
+  .section-head,
+  .prose,
+  .fact-row,
+  .big-stat,
+  .coffee,
+  .subscription > *,
+  .section > .wrap > .section-action,
+  .lead-panel
+),
+html.motion .band:not(.is-in) :is(
+  .band-inner > .kicker,
+  .band-inner > h2,
+  .band-lead,
+  .band-numbers > li
+),
+html.motion .site-footer:not(.is-in) .site-footer-inner > * {
+  opacity: 0;
+}
+
+html.motion .is-in :is(
+  .section-head,
+  .prose,
+  .fact-row,
+  .big-stat,
+  .coffee,
+  .subscription > *,
+  .section > .wrap > .section-action,
+  .lead-panel,
+  .band-inner > .kicker,
+  .band-inner > h2,
+  .band-lead,
+  .band-numbers > li,
+  .site-footer-inner > *
+) {
+  animation: rise-in 0.7s ease both;
+}
+
+html.motion .is-in .prose,
+html.motion .is-in .subscription > *:first-child,
+html.motion .is-in .band-inner > h2,
+html.motion .is-in .site-footer-inner > *:nth-child(2) {
+  animation-delay: 0.08s;
+}
+
+html.motion .is-in .fact-row:nth-child(1),
+html.motion .is-in .coffee:nth-child(1),
+html.motion .is-in .price-line,
+html.motion .is-in .band-lead,
+html.motion .is-in .site-footer-inner > *:nth-child(3) {
+  animation-delay: 0.14s;
+}
+
+html.motion .is-in .fact-row:nth-child(2),
+html.motion .is-in .coffee:nth-child(2),
+html.motion .is-in .section > .wrap > .section-action,
+html.motion .is-in .lead-panel,
+html.motion .is-in .band-numbers > li:nth-child(1),
+html.motion .is-in .site-footer-inner > *:nth-child(4) {
+  animation-delay: 0.2s;
+}
+
+html.motion .is-in .fact-row:nth-child(3),
+html.motion .is-in .coffee:nth-child(3),
+html.motion .is-in .band-numbers > li:nth-child(2),
+html.motion .is-in .site-footer-inner > *:nth-child(5) {
+  animation-delay: 0.26s;
+}
+
+html.motion .is-in .fact-row:nth-child(4),
+html.motion .is-in .coffee:nth-child(4),
+html.motion .is-in .big-stat,
+html.motion .is-in .band-numbers > li:nth-child(3) {
+  animation-delay: 0.32s;
+}
+
+html.motion .is-in .band-numbers > li:nth-child(4) {
+  animation-delay: 0.38s;
+}
+
+@keyframes rise-in {
   from {
     opacity: 0;
     transform: translateY(14px);
@@ -1185,6 +1303,18 @@ p {
   to {
     opacity: 1;
     transform: none;
+  }
+}
+
+@keyframes hero-order-in {
+  from {
+    opacity: 0;
+    transform: translateX(-50%) translateY(14px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(-50%);
   }
 }
 
@@ -1210,7 +1340,30 @@ p {
   .not-found-code,
   .not-found-title,
   .not-found-home,
-  .not-found-home::before {
+  .not-found-home::before,
+  .hero-photo,
+  .hero-kicker,
+  .hero h1,
+  .hero-sub,
+  .hero-note,
+  .hero-address,
+  .topbar-inner,
+  .hero .order-button,
+  html.motion .is-in :is(
+    .section-head,
+    .prose,
+    .fact-row,
+    .big-stat,
+    .coffee,
+    .subscription > *,
+    .section > .wrap > .section-action,
+    .lead-panel,
+    .band-inner > .kicker,
+    .band-inner > h2,
+    .band-lead,
+    .band-numbers > li,
+    .site-footer-inner > *
+  ) {
     animation: none;
   }
 }
