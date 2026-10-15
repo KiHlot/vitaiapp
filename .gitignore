@@ -42,3 +42,6 @@ next-env.d.ts
 
 # editor
 .idea
+
+# ключ Google, не коммитить
+/secrets
