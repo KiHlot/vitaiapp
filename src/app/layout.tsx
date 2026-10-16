@@ -25,21 +25,21 @@ const siteUrl =
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
-  title: "Кварта — обжарка в Минске",
+  title: "Кварта — обжарка кофе в Минске",
   description,
   openGraph: {
     type: "website",
     locale: "ru_RU",
     url: "/",
     siteName: "Кварта",
-    title: "Кварта — обжарка в Минске",
+    title: "Кварта — обжарка кофе в Минске",
     description,
     images: [
       {
-        url: "/photos/beans.jpg",
-        width: 1600,
-        height: 1220,
-        alt: "Обжаренные кофейные зёрна",
+        url: "/photos/og.jpg?v=2",
+        width: 1280,
+        height: 720,
+        alt: "Кварта — обжарка кофе",
       },
     ],
   },

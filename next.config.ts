@@ -8,7 +8,13 @@ const nextConfig: NextConfig = {
   ...(hostingExport
     ? {
         output: "export",
-        images: { unoptimized: true },
+        images: {
+          loader: "custom",
+          loaderFile: "./src/lib/image-loader.ts",
+          deviceSizes: [480, 640, 828, 1200],
+          imageSizes: [],
+        },
+        experimental: { inlineCss: true },
       }
     : {}),
 };

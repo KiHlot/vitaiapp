@@ -9,11 +9,11 @@ export function Hero() {
           <div className="hero-ring">
             <div className="hero-photo">
               <Image
-                src="/photos/beans.jpg"
+                src="/photos/beans.webp"
                 alt="Обжаренные кофейные зёрна"
                 fill
-                priority
-                sizes="620px"
+                preload
+                sizes="(max-width: 720px) 88vw, 620px"
               />
               <div className="hero-shade" />
             </div>

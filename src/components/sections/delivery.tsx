@@ -6,7 +6,7 @@ export function Delivery() {
     <section className="band" aria-labelledby="route-title">
       <div className="band-photo">
         <Image
-          src="/photos/roast.jpg"
+          src="/photos/roast.webp"
           alt="Портафильтры с зерном, помолом и готовым эспрессо"
           fill
           sizes="100vw"
