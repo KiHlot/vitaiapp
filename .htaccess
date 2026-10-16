@@ -1,0 +1,10 @@
+SetEnv GHOST_NODE_VERSION_CHECK false
+PassengerEnabled on
+PassengerFriendlyErrorPages on
+PassengerNodejs /opt/rh/rh-nodejs22/root/usr/bin/node
+PassengerStartupFile server.js
+PassengerResolveSymlinksInDocumentRoot on
+Require all granted
+PassengerAppType node
+PassengerAppRoot /home/a0183236/domains/bandman.ru/public_html
+Options -MultiViews
