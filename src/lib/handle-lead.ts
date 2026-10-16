@@ -1,5 +1,6 @@
 import { appendLeadRow, ensureSheetHeaders } from "./google-sheet";
 import { normalizeBelarusPhone, type Interest } from "./phone";
+import { sendTelegram } from "./telegram";
 
 const WINDOW_MS = 10 * 60 * 1000;
 
@@ -104,6 +105,12 @@ export async function handleLead(request: Request) {
     );
   }
 
+  const stamp = minskStamp();
+  const interest = interestLabel[body.interest];
+  const source = clip(touch.utmSource, 200);
+  const campaign = clip(touch.utmCampaign, 200);
+  const page = clip(touch.page, 500);
+
   try {
     const rows = await ensureSheetHeaders();
     if (recentDuplicate(rows, phone, Date.now())) {
@@ -111,17 +118,17 @@ export async function handleLead(request: Request) {
     }
 
     await appendLeadRow([
-      minskStamp(),
+      stamp,
       name,
       phone,
-      interestLabel[body.interest],
+      interest,
       coffee,
       comment,
-      clip(touch.utmSource, 200),
+      source,
       clip(touch.utmMedium, 200),
-      clip(touch.utmCampaign, 200),
+      campaign,
       clip(touch.utmContent, 200),
-      clip(touch.page, 500),
+      page,
       clip(touch.referrer, 500),
       clip(touch.yclid, 200),
     ]);
@@ -131,6 +138,27 @@ export async function handleLead(request: Request) {
       error instanceof Error ? error.message : "неизвестная ошибка",
     );
     return Response.json({ message: failMessage }, { status: 502 });
+  }
+
+  const lines = [
+    "Новая заявка",
+    `Имя: ${name}`,
+    `Телефон: ${phone}`,
+    `Интерес: ${interest}`,
+    coffee && `Зерно: ${coffee}`,
+    comment && `Комментарий: ${comment}`,
+    source && `Источник: ${source}${campaign ? `, ${campaign}` : ""}`,
+    page && `Страница: ${page}`,
+    `Когда: ${stamp}`,
+  ];
+
+  try {
+    await sendTelegram(lines.filter(Boolean).join("\n"));
+  } catch (error) {
+    console.error(
+      "Заявка в таблице, но в Telegram не ушла:",
+      error instanceof Error ? error.message : "неизвестная ошибка",
+    );
   }
 
   return Response.json({ ok: true });

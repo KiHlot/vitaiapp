@@ -3,6 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.handleLead = handleLead;
 const google_sheet_1 = require("./google-sheet");
 const phone_1 = require("./phone");
+const telegram_1 = require("./telegram");
 const WINDOW_MS = 10 * 60 * 1000;
 const interestLabel = {
     subscription: "Подписка",
@@ -70,23 +71,28 @@ async function handleLead(request) {
     if (!isInterest(body.interest)) {
         return Response.json({ message: "Выберите, что вас интересует" }, { status: 400 });
     }
+    const stamp = minskStamp();
+    const interest = interestLabel[body.interest];
+    const source = clip(touch.utmSource, 200);
+    const campaign = clip(touch.utmCampaign, 200);
+    const page = clip(touch.page, 500);
     try {
         const rows = await (0, google_sheet_1.ensureSheetHeaders)();
         if (recentDuplicate(rows, phone, Date.now())) {
             return Response.json({ duplicate: true });
         }
         await (0, google_sheet_1.appendLeadRow)([
-            minskStamp(),
+            stamp,
             name,
             phone,
-            interestLabel[body.interest],
+            interest,
             coffee,
             comment,
-            clip(touch.utmSource, 200),
+            source,
             clip(touch.utmMedium, 200),
-            clip(touch.utmCampaign, 200),
+            campaign,
             clip(touch.utmContent, 200),
-            clip(touch.page, 500),
+            page,
             clip(touch.referrer, 500),
             clip(touch.yclid, 200),
         ]);
@@ -94,6 +100,23 @@ async function handleLead(request) {
     catch (error) {
         console.error("Не удалось записать заявку:", error instanceof Error ? error.message : "неизвестная ошибка");
         return Response.json({ message: failMessage }, { status: 502 });
+    }
+    const lines = [
+        "Новая заявка",
+        `Имя: ${name}`,
+        `Телефон: ${phone}`,
+        `Интерес: ${interest}`,
+        coffee && `Зерно: ${coffee}`,
+        comment && `Комментарий: ${comment}`,
+        source && `Источник: ${source}${campaign ? `, ${campaign}` : ""}`,
+        page && `Страница: ${page}`,
+        `Когда: ${stamp}`,
+    ];
+    try {
+        await (0, telegram_1.sendTelegram)(lines.filter(Boolean).join("\n"));
+    }
+    catch (error) {
+        console.error("Заявка в таблице, но в Telegram не ушла:", error instanceof Error ? error.message : "неизвестная ошибка");
     }
     return Response.json({ ok: true });
 }
